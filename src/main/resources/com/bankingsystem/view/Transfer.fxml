@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.bankingsystem.controller.TransferController"
+           style="-fx-background-color: #F8FAFC;">
+
+    <BorderPane>
+
+    <!-- Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" prefWidth="240.0" minWidth="240.0" maxWidth="240.0">
+            <VBox styleClass="sidebar-top" spacing="12">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <StackPane styleClass="logo-icon">
+                        <Label text="BF" styleClass="logo-icon-text"/>
+                    </StackPane>
+                    <Label text="HamroBank" styleClass="logo-text"/>
+                </HBox>
+                <Label fx:id="sidebarNameLabel" text="Welcome, Alex" styleClass="sidebar-subtitle" />
+            </VBox>
+
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+                <VBox spacing="4">
+                    <padding><Insets top="16" right="12" bottom="16" left="12"/></padding>
+                    <Button text="Dashboard" onAction="#onBack" styleClass="nav-btn"/>
+                    <Button text="Transfer" styleClass="nav-btn, nav-btn-active"/>
+                    <Button text="Transactions" onAction="#onTransactions" styleClass="nav-btn"/>
+                </VBox>
+            </ScrollPane>
+
+            <VBox styleClass="sidebar-bottom">
+                <Button text="Logout" onAction="#onLogout" styleClass="nav-btn, nav-btn-logout"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Main Content -->
+    <center>
+        <StackPane>
+            <!-- Background Layer -->
+            <ScrollPane fitToWidth="true" styleClass="scroll-pane" hbarPolicy="NEVER">
+                <VBox spacing="32" style="-fx-background-color: #F8FAFC;">
+                    <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+                    <VBox spacing="4">
+                        <Label text="Transfer Funds" styleClass="hero-title"/>
+                        <Label text="Securely send money to any bank account" styleClass="tagline"/>
+                    </VBox>
+
+                    <!-- Form Card -->
+                    <VBox styleClass="card" spacing="20" maxWidth="600">
+                        <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+                        
+                        <VBox spacing="8">
+                            <Label text="AVAILABLE BALANCE" styleClass="form-label"/>
+                            <Label fx:id="balanceLabel" text="NPR 0.00" styleClass="card-title" style="-fx-text-fill: #1E3A8A;"/>
+                        </VBox>
+
+                        <VBox spacing="8">
+                            <Label text="Recipient Account Number" styleClass="form-label"/>
+                            <TextField fx:id="receiverAccountField" promptText="Enter account number" styleClass="input"/>
+                        </VBox>
+
+                        <VBox spacing="8">
+                            <Label text="Amount (NPR)" styleClass="form-label"/>
+                            <TextField fx:id="amountField" promptText="0.00" styleClass="input"/>
+                        </VBox>
+
+                        <VBox spacing="8">
+                            <Label text="Note (Optional)" styleClass="form-label"/>
+                            <TextField fx:id="noteField" promptText="What is this for?" styleClass="input"/>
+                        </VBox>
+
+                        <HBox spacing="12" alignment="CENTER_RIGHT">
+                           <Button text="Clear" onAction="#onCancel" styleClass="secondary-btn" prefWidth="100"/>
+                           <Button text="Continue" onAction="#onConfirm" styleClass="primary-btn" prefWidth="180"/>
+                        </HBox>
+                        
+                        <Label fx:id="errorLabel" styleClass="error" wrapText="true" alignment="CENTER" maxWidth="Infinity"/>
+                    </VBox>
+                </VBox>
+            </ScrollPane>
+
+        </StackPane>
+    </center>
+
+    </BorderPane>
+
+    <!-- Modal Overlay -->
+    <StackPane fx:id="modalOverlay" styleClass="modal-overlay" visible="false">
+        <VBox styleClass="modal-container" fx:id="modalContainer">
+            <VBox fx:id="modalHeader" styleClass="modal-header">
+                <StackPane fx:id="modalIconContainer" styleClass="modal-icon-wait">
+                    <Label fx:id="modalIcon" text="!" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #1E3A8A;"/>
+                </StackPane>
+                <Label fx:id="modalTitle" text="Confirm Transfer" styleClass="modal-title"/>
+            </VBox>
+            
+            <Label fx:id="modalBody" text="Are you sure you want to send money?" styleClass="modal-body"/>
+            
+            <HBox fx:id="modalFooter" styleClass="modal-footer">
+                <Button fx:id="modalCancelBtn" text="Cancel" onAction="#onCloseModal" styleClass="secondary-btn"/>
+                <Button fx:id="modalConfirmBtn" text="Confirm Transfer" styleClass="primary-btn"/>
+                <Button fx:id="modalCloseBtn" text="Close" onAction="#onCloseModal" styleClass="primary-btn" visible="false" managed="false"/>
+            </HBox>
+        </VBox>
+    </StackPane>
+
+</StackPane>

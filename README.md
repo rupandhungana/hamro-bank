@@ -1,6 +1,4 @@
-# hamro-bank
-## Project Overview 
-This repository presents an academic implementation of a secure Banking System developed using Java 17 and JavaFX. The system focuses on the practical application of advanced Object-Oriented Programming (OOP) design patterns, including the Service and Repository patterns, to ensure a strict separation of concerns. Key technical features include a robust authentication system using BCrypt hashing, a layered architecture (Model-View-Controller), and an atomic transaction engine that manages fund transfers with database-level row locking to prevent race conditions and ensure data integrity.
+# Banking System (JavaFX + MySQL)
 
 ## Requirements
 - Java 17+

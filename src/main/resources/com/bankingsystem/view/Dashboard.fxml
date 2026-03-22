@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bankingsystem.controller.DashboardController"
+            style="-fx-background-color: #F8FAFC;">
+
+    <!-- Sidebar Left -->
+    <left>
+        <VBox styleClass="sidebar" prefWidth="240.0" minWidth="240.0" maxWidth="240.0">
+            <!-- Logo Section -->
+            <VBox styleClass="sidebar-top" spacing="12">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <StackPane styleClass="logo-icon">
+                        <Label text="BF" styleClass="logo-icon-text"/>
+                    </StackPane>
+                    <Label text="HamroBank" styleClass="logo-text"/>
+                </HBox>
+                <Label fx:id="sidebarNameLabel" text="Welcome, Alex" styleClass="sidebar-subtitle" />
+            </VBox>
+
+            <!-- Navigation Scroll -->
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+                <VBox spacing="4">
+                    <padding><Insets top="16" right="12" bottom="16" left="12"/></padding>
+
+                    <Button text="Dashboard" onAction="#onRefresh" styleClass="nav-btn, nav-btn-active"/>
+                    <Button text="Transfer" onAction="#onTransfer" styleClass="nav-btn"/>
+                    <Button text="Transactions" onAction="#onTransactions" styleClass="nav-btn"/>
+                </VBox>
+            </ScrollPane>
+
+            <!-- Bottom Actions -->
+            <VBox styleClass="sidebar-bottom">
+                <Button text="Logout" onAction="#onLogout" styleClass="nav-btn, nav-btn-logout"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Main Content Center -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="scroll-pane" hbarPolicy="NEVER">
+            <VBox spacing="32" style="-fx-background-color: #F8FAFC;">
+                <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+                <!-- Header Row -->
+                <HBox alignment="CENTER_LEFT">
+                    <VBox spacing="4">
+                        <Label fx:id="greetingLabel" text="Hello," styleClass="hero-title"/>
+                        <Label fx:id="dateLabel" text="Thursday, March 19, 2026" styleClass="tagline"/>
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="errorLabel" styleClass="error" wrapText="true" maxWidth="300"/>
+                </HBox>
+
+                <!-- Balance Card + Stats Container -->
+                <HBox spacing="24">
+                    <!-- Balance Card (Blue Gradient) -->
+                    <StackPane styleClass="balance-card" HBox.hgrow="ALWAYS" prefHeight="220">
+                        <VBox spacing="20">
+                            <!-- Account Type & Visibility -->
+                            <HBox alignment="CENTER_LEFT">
+                                <Label fx:id="accountTypeLabel" text="Savings Account" styleClass="balance-account"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button fx:id="hideBtn" text="Show" onAction="#onToggleBalance" styleClass="icon-btn" prefWidth="120"/>
+                            </HBox>
+
+                            <!-- Balance display -->
+                            <VBox spacing="4">
+                                <Label text="AVAILABLE BALANCE" styleClass="balance-label"/>
+                                <Label fx:id="balanceLabel" text="NPR 0.00" styleClass="balance-amount"/>
+                            </VBox>
+
+                            <!-- Account Metadata -->
+                            <HBox alignment="BOTTOM_LEFT">
+                                <VBox spacing="4">
+                                    <Label text="ACCOUNT NUMBER" styleClass="balance-label"/>
+                                    <Label fx:id="accountLabel" text="—" styleClass="balance-account" style="-fx-font-family: 'monospace'; -fx-letter-spacing: 1px;"/>
+                                </VBox>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <VBox spacing="4" alignment="BOTTOM_RIGHT">
+                                    <Label text="ACCOUNT HOLDER" styleClass="balance-label"/>
+                                    <Label fx:id="nameLabel" text="—" styleClass="balance-account"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </StackPane>
+
+                    <!-- Vertical Stat Cards Column -->
+                    <VBox spacing="16" prefWidth="280">
+                        <!-- Total Deposits (In) -->
+                        <VBox styleClass="card" spacing="8" VBox.vgrow="ALWAYS">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <StackPane styleClass="action-icon-green" prefWidth="32" prefHeight="32">
+                                    <Label text="+" style="-fx-text-fill: #10B981; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                                </StackPane>
+                                <Label text="TOTAL IN" styleClass="form-label"/>
+                            </HBox>
+                            <Label fx:id="totalInLabel" text="NPR 0.00" styleClass="stat-number"/>
+                            <Label text="Recent Deposits" styleClass="micro"/>
+                        </VBox>
+
+                        <!-- Total Transferred (Out) -->
+                        <VBox styleClass="card" spacing="8" VBox.vgrow="ALWAYS">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <StackPane styleClass="action-icon-blue" prefWidth="32" prefHeight="32">
+                                    <Label text="-" style="-fx-text-fill: #3B82F6; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                                </StackPane>
+                                <Label text="TOTAL OUT" styleClass="form-label"/>
+                            </HBox>
+                            <Label fx:id="totalOutLabel" text="NPR 0.00" styleClass="stat-number"/>
+                            <Label text="Recent Transfers" styleClass="micro"/>
+                        </VBox>
+                    </VBox>
+                </HBox>
+
+                <!-- Quick Actions Grid -->
+                <VBox spacing="16">
+                    <Label text="Quick Actions" styleClass="section-title"/>
+                    <HBox spacing="16">
+                        <!-- Transfer Quick Action -->
+                        <HBox fx:id="qaTransfer" onMouseClicked="#onTransferClick" styleClass="action-card" spacing="16" HBox.hgrow="ALWAYS">
+                            <StackPane styleClass="action-icon-blue">
+                                <Label text="⇄" styleClass="action-glyph-blue"/>
+                            </StackPane>
+                            <VBox spacing="2">
+                                <Label text="Transfer Money" styleClass="body-medium"/>
+                                <Label text="Send funds to any account" styleClass="body-small"/>
+                            </VBox>
+                        </HBox>
+
+                        <!-- Transactions Quick Action -->
+                        <HBox fx:id="qaHistory" onMouseClicked="#onTransactionsClick" styleClass="action-card" spacing="16" HBox.hgrow="ALWAYS">
+                            <StackPane styleClass="action-icon-green">
+                                <Label text="≡" styleClass="action-glyph-green"/>
+                            </StackPane>
+                            <VBox spacing="2">
+                                <Label text="View History" styleClass="body-medium"/>
+                                <Label text="Full transaction records" styleClass="body-small"/>
+                            </VBox>
+                        </HBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Recent Transactions History -->
+                <VBox spacing="16">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="Recent Transactions" styleClass="section-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Hyperlink text="View all →" onAction="#onTransactions" styleClass="link" style="-fx-font-size: 13px;"/>
+                    </HBox>
+                    <VBox fx:id="recentTxList" styleClass="card" spacing="0">
+                        <padding><Insets top="4" bottom="4" /></padding>
+                        <!-- Transactions will be injected by the controller -->
+                    </VBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
