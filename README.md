@@ -28,7 +28,7 @@ mvn clean
 
 1. **What is encapsulation in this project?**  
    Encapsulation means bundling data and methods in one class and hiding internal state using access modifiers.  
-   Example: `Account` keeps balance as a field and updates it through methods like `deposit()` and `withdraw()`.
+   Example: `Account` keeps `balance` private and exposes controlled access through methods like `getBalance()` and `setBalance()`.
 
 2. **Give a simple Java example of encapsulation.**
    ```java
