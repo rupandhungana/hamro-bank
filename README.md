@@ -27,7 +27,7 @@ mvn clean
 ## Viva Questions and Answers: Mobile Banking App using JavaFX and MySQL
 
 1. **What is encapsulation in this project?**  
-   Encapsulation means keeping data and behavior together in one class.  
+   Encapsulation means bundling data and methods in one class and hiding internal state using access modifiers.  
    Example: `Account` keeps balance as a field and updates it through methods like `deposit()` and `withdraw()`.
 
 2. **Give a simple Java example of encapsulation.**
@@ -67,7 +67,7 @@ mvn clean
 
 9. **How do you load an FXML screen in JavaFX?**
    ```java
-   FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/bankingsystem/view/Login.fxml"));
+   FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/Login.fxml")); // example path
    Parent root = loader.load();
    ```
 
@@ -124,5 +124,5 @@ mvn clean
     It is suitable for structured entities like users, accounts, and transactions.
 
 22. **Cross-question: What is one future improvement you can add?**  
-    Add OTP-based 2FA for login/transfer confirmation.  
+    Add OTP-based two-factor authentication (2FA) for login/transfer confirmation.  
     It improves security beyond just username and password.
