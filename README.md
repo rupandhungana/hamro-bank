@@ -45,8 +45,13 @@ mvn clean
 
 4. **Give a simple inheritance example.**
    ```java
-   class Account { void showType(){ System.out.println("General"); } }
-   class SavingsAccount extends Account { @Override void showType(){ System.out.println("Savings"); } }
+   class Account {
+       void showType() { System.out.println("General"); }
+   }
+   class SavingsAccount extends Account {
+       @Override
+       void showType() { System.out.println("Savings"); }
+   }
    ```
 
 5. **What is polymorphism in your project context?**  
@@ -67,7 +72,7 @@ mvn clean
 
 9. **How do you load an FXML screen in JavaFX?**
    ```java
-   FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/Login.fxml")); // example path
+   FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/Login.fxml"));
    Parent root = loader.load();
    ```
 

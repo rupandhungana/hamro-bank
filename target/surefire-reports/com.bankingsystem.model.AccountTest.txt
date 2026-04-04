@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.bankingsystem.model.AccountTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 s -- in com.bankingsystem.model.AccountTest

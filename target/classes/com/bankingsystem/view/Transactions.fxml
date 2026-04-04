@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bankingsystem.controller.TransactionsController"
+            style="-fx-background-color: #F8FAFC;">
+
+    <!-- Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" prefWidth="240.0" minWidth="240.0" maxWidth="240.0">
+            <VBox styleClass="sidebar-top" spacing="12">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <StackPane styleClass="logo-icon">
+                        <Label text="BF" styleClass="logo-icon-text"/>
+                    </StackPane>
+                    <Label text="HamroBank" styleClass="logo-text"/>
+                </HBox>
+                <Label fx:id="sidebarNameLabel" text="Welcome, Alex" styleClass="sidebar-subtitle" />
+            </VBox>
+
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+                <VBox spacing="4">
+                    <padding><Insets top="16" right="12" bottom="16" left="12"/></padding>
+                    <Button text="Dashboard" onAction="#onBack" styleClass="nav-btn"/>
+                    <Button text="Transfer" onAction="#onTransfer" styleClass="nav-btn"/>
+                    <Button text="Transactions" styleClass="nav-btn, nav-btn-active"/>
+                </VBox>
+            </ScrollPane>
+
+            <VBox styleClass="sidebar-bottom">
+                <Button text="Logout" onAction="#onLogout" styleClass="nav-btn, nav-btn-logout"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="32" style="-fx-background-color: #F8FAFC;">
+            <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+            <!-- Header Row -->
+            <HBox alignment="CENTER_LEFT">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Transaction History" styleClass="hero-title"/>
+                    <Label fx:id="showingLabel" text="Showing all transactions" styleClass="tagline"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <TextField fx:id="searchField" promptText="Search sender, receiver, type..." styleClass="input" prefHeight="40" prefWidth="300"/>
+                    <Button text="Refresh" styleClass="primary-btn" prefHeight="40" prefWidth="100"/>
+                </HBox>
+            </HBox>
+
+            <!-- Filter Pills & Snapshot -->
+            <HBox spacing="16" alignment="CENTER_LEFT">
+                <HBox spacing="0" styleClass="tabs-shell">
+                    <ToggleButton fx:id="allBtn" text="All" styleClass="tab-btn-mini" selected="true"/>
+                    <ToggleButton fx:id="inBtn"  text="Incoming" styleClass="tab-btn-mini"/>
+                    <ToggleButton fx:id="outBtn" text="Outgoing" styleClass="tab-btn-mini"/>
+                </HBox>
+                <Label fx:id="resultsCountLabel" text="0 results" styleClass="body-small" style="-fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="totalSumLabel" text="Total: NPR 0.00" styleClass="section-title" style="-fx-text-fill: #1E3A8A;"/>
+            </HBox>
+
+            <!-- Table Area -->
+            <VBox styleClass="card" VBox.vgrow="ALWAYS">
+                <TableView fx:id="transactionTable" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
+                    <columns>
+                        <TableColumn fx:id="colDate"     text="DATE"     prefWidth="130"/>
+                        <TableColumn fx:id="colType"     text="TYPE"     prefWidth="160"/>
+                        <TableColumn fx:id="colSender"   text="FROM"     prefWidth="180"/>
+                        <TableColumn fx:id="colReceiver" text="TO"       prefWidth="180"/>
+                        <TableColumn fx:id="colAmount"   text="AMOUNT"   prefWidth="150"/>
+                        <TableColumn fx:id="colStatus"   text="STATUS"    prefWidth="100"/>
+                    </columns>
+                    <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                </TableView>
+            </VBox>
+            
+            <Label fx:id="errorLabel" styleClass="error" alignment="CENTER" maxWidth="Infinity" visible="false" managed="false"/>
+        </VBox>
+    </center>
+
+</BorderPane>
